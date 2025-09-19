@@ -17,23 +17,20 @@ jobs:
          - name: restore
            run: dotnet restore src/Presentation/Nop.Web/Nop.Web.csproj
          - name: build
-           run: dotnet build --configuration Debug src/Presentation/Nop.Web/Nop.Web.csproj
+           run: dotnet build --configuration Release src/Presentation/Nop.Web/Nop.Web.csproj 
          - name: test
-           run: dotnet test src/Tests/Nop.Tests/Nop.Tests.csproj
+           run: dotnet test src/Tests/Nop.Tests/Nop.Tests.csproj --configuration Release --logger "trx;LogFileName=test_results.trx" --results-directory ./TestResults
          - name: publish
            run: dotnet publish --configuration Release src/Presentation/Nop.Web/Nop.Web.csproj --output published
-         - uses: actions/checkout@v2
-         - uses: vimtor/action-zip@v1.2
+         - name: Zip published folder
+           run: zip -r published.zip published 
+         - name: Publish Test Results
+           uses: dorny/test-reporter@v1
            with:
-               files: published
-               dest: result.zip
-         - name : uploading test result 
-           run: |
-              zip -r published ./result.zip
-         - uses: actions/upload-artifact@v4
-           with:
-               name: my-artifact
-               path: ${{ github.workspace }}/result.zip
+             name: .NET Tests
+             path: TestResults/*.trx
+          
+         
          
          
           
