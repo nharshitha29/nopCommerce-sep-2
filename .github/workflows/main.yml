@@ -26,9 +26,11 @@ jobs:
            run: zip -r published.zip published 
          - name: Publish Test Results
            uses: dorny/test-reporter@v1
+           if: always()
            with:
              name: .NET Tests
              path: TestResults/*.trx
+             reporter: dotnet-trx
           
          
          
