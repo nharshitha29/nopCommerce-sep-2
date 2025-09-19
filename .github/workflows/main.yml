@@ -27,6 +27,9 @@ jobs:
            with:
                files: published
                dest: result.zip
+         - name : uploading test result 
+           run: |
+              zip -r result.zip ./published
          - uses: actions/upload-artifact@v4
            with:
                name: my-artifact
