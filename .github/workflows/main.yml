@@ -28,10 +28,14 @@ jobs:
            uses: dorny/test-reporter@v1
            if: always()
            with:
-             name: .NET Tests
+             name: Tests Results
              path: TestResults/*.trx
              reporter: dotnet-trx
-          
+         - name: Upload test results
+           uses: actions/upload-artifact@v4
+           with:
+             name: test-results
+             path: TestResults/
          
          
          
