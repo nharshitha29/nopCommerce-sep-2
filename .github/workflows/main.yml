@@ -22,5 +22,19 @@ jobs:
            run: dotnet test src/Tests/Nop.Tests/Nop.Tests.csproj
          - name: publish
            run: dotnet publish --configuration Release src/Presentation/Nop.Web/Nop.Web.csproj --output published
+name: Zip Files
+    on:
+       release:
+          types: [published]
+
+jobs:
+  zip-files:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: vimtor/action-zip@v1.2
+        with:
+          files: published
+          dest: result.zip
           
                    
