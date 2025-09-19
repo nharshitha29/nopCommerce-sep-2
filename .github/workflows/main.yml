@@ -31,11 +31,12 @@ jobs:
              name: Tests Results
              path: TestResults/*.trx
              reporter: dotnet-trx
-         - name: Upload test results
+         - name: Upload published artifacts
            uses: actions/upload-artifact@v4
            with:
-             name: test-results
-             path: TestResults/
+             name: published-app
+             path: published.zip
+         
          
          
          
