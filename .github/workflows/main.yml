@@ -19,7 +19,7 @@ jobs:
          - name: build
            run: dotnet build --configuration Release src/Presentation/Nop.Web/Nop.Web.csproj 
          - name: test
-           run: dotnet test src/Tests/Nop.Tests/Nop.Tests.csproj --configuration Release --logger "trx;LogFileName=test_results.trx" --results-directory ./TestResults
+           run: dotnet test src/Presentation/Nop.Web/Nop.Web.csproj --logger "trx;LogFileName=test_results.trx" --results-directory ./TestResults
          - name: publish
            run: dotnet publish --configuration Release src/Presentation/Nop.Web/Nop.Web.csproj --output published
          - name: Zip published folder
